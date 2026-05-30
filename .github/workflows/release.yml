@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: recursive
+          # Отключили автоматическое скачивание приватных папок, чтобы не было ошибки
+          submodules: false
           fetch-depth: 0
-          # Убрали строку с требованием token
 
       - uses: DamianReeves/write-file-action@master
         with:
