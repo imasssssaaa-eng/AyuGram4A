@@ -4,7 +4,6 @@ on:
 
 jobs:
   build:
-    # Заменили self-hosted на стандартный сервер GitHub
     runs-on: ubuntu-latest
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
@@ -70,7 +69,8 @@ jobs:
         run: ./gradlew assembleAfatRelease
 
       - name: Upload
-        uses: actions/upload-artifact@v3
+        # Обновили версию с v3 на v4
+        uses: actions/upload-artifact@v4
         with:
           name: Release APK
           path: TMessagesProj/build/outputs/apk/afat/release/*.apk
