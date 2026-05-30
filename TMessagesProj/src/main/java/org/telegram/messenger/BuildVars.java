@@ -14,10 +14,11 @@ import com.exteragram.messenger.ExteraConfig;
 
 public class BuildVars {
 
-    public static boolean DEBUG_VERSION = BuildConfig.BUILD_TYPE.equals("debug");
+    // Включаем тестовый режим принудительно
+    public static boolean DEBUG_VERSION = true;
     public static boolean LOGS_ENABLED = ExteraConfig.getLogging();
-    public static boolean DEBUG_PRIVATE_VERSION = DEBUG_VERSION;
-    public static boolean USE_CLOUD_STRINGS = true;
+    public static boolean DEBUG_PRIVATE_VERSION = true;
+    public static boolean USE_CLOUD_STRINGS = false;
     public static boolean CHECK_UPDATES = false;
     public static boolean NO_SCOPED_STORAGE = Build.VERSION.SDK_INT <= 29;
     public static boolean PM_BUILD = BuildConfig.IS_PM_BUILD;
@@ -26,6 +27,9 @@ public class BuildVars {
     public static String AYU_VERSION;
     public static int APP_ID;
     public static String APP_HASH;
+    
+    // Перенаправляем сеть в пустоту (на локальный адрес)
+    public static String APP_SERVER_ADDRESS = "127.0.0.1";
 
     // SafetyNet key for Google Identity SDK, set it to empty to disable
     public static String SAFETYNET_KEY = "";
@@ -41,11 +45,9 @@ public class BuildVars {
         BUILD_VERSION_STRING = BuildConfig.VERSION_NAME;
         AYU_VERSION = BuildConfig.AYU_VERSION;
 
-        // Obtain your own APP_ID at https://core.telegram.org/api/obtaining_api_id
-        APP_ID = BuildConfig.APP_ID;
-
-        // Obtain your own APP_HASH at https://core.telegram.org/api/obtaining_api_id
-        APP_HASH = BuildConfig.APP_HASH;
+        // Обнуляем оригинальные ключи Telegram
+        APP_ID = 0;
+        APP_HASH = "";
 
         // Using our SMS_HASH you will not be able to get the SMS Retriever to work, generate your own keys with https://raw.githubusercontent.com/googlearchive/android-credentials/master/sms-verification/bin/sms_retriever_hash_v9.sh
         SMS_HASH = isBetaApp() ? "2P1CNXYRAK6" : "UfajQkYoxTu";
