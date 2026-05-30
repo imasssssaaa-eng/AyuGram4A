@@ -15,7 +15,7 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
+          # Убрали строку с требованием token
 
       - uses: DamianReeves/write-file-action@master
         with:
@@ -23,11 +23,11 @@ jobs:
           contents: |
             APP_ID = 6
             APP_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-            MAPS_V2_API = ${{ secrets.MAPS_KEY }}
+            MAPS_V2_API = "no_key"
             
-            SIGNING_KEY_PASSWORD = ${{ secrets.CERT_KEY }}
-            SIGNING_KEY_ALIAS = ${{ secrets.CERT_KEY }}
-            SIGNING_KEY_STORE_PASSWORD = ${{ secrets.CERT_KEY }}
+            SIGNING_KEY_PASSWORD = "no_key"
+            SIGNING_KEY_ALIAS = "no_key"
+            SIGNING_KEY_STORE_PASSWORD = "no_key"
           write-mode: overwrite
 
       - name: Update packages
@@ -69,7 +69,6 @@ jobs:
         run: ./gradlew assembleAfatRelease
 
       - name: Upload
-        # Обновили версию с v3 на v4
         uses: actions/upload-artifact@v4
         with:
           name: Release APK
